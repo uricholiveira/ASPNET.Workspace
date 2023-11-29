@@ -1,0 +1,44 @@
+# This is a generated file. Not intended for manual editing.
+version: "3.8"
+services:
+  user-service:
+    build:
+      context: "/mnt/c/Users/Urich/RiderProjects/ASPNET.Workspace/Users"
+      dockerfile: "Application/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net7.0/Application.dll"
+    environment:
+      ASPNETCORE_STATICWEBASSETS: "/app/bin/Debug/net7.0/Application.staticwebassets.runtime.CT.json"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+      NUGET_PACKAGES: "C:\\Users\\Urich\\.nuget\\packages"
+      NUGET_FALLBACK_PACKAGES: "C:\\Users\\Urich\\.nuget\\packages"
+    image: "user-service:dev"
+    ports: []
+    volumes:
+    - "/mnt/c/Users/Urich/.nuget/packages:/root/.nuget/fallbackpackages"
+    - "/mnt/c/Users/Urich/RiderProjects/ASPNET.Workspace/Users/Application:/app:rw"
+    - "/mnt/c/Users/Urich/RiderProjects/ASPNET.Workspace/Users:/src:rw"
+    working_dir: "/app"
+  user-worker:
+    build:
+      context: "/mnt/c/Users/Urich/RiderProjects/ASPNET.Workspace/Users"
+      dockerfile: "Worker/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net7.0/Worker.dll"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+      NUGET_PACKAGES: "C:\\Users\\Urich\\.nuget\\packages"
+      NUGET_FALLBACK_PACKAGES: "C:\\Users\\Urich\\.nuget\\packages"
+    image: "user-worker:dev"
+    ports: []
+    volumes:
+    - "/mnt/c/Users/Urich/.nuget/packages:/root/.nuget/fallbackpackages"
+    - "/mnt/c/Users/Urich/RiderProjects/ASPNET.Workspace/Users/Worker:/app:rw"
+    - "/mnt/c/Users/Urich/RiderProjects/ASPNET.Workspace/Users:/src:rw"
+    working_dir: "/app"
